@@ -1,22 +1,39 @@
+# src/main/resources/application.yml
 server:
-  port: 8888
+  port: 8080
+
 spring:
   application:
-    name: config-server
+    name: api-gateway
   cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
     config:
-      server:
-        git:
-          uri: https://github.com/Rossmery2888/config-repo.git
-          default-label: main
-          search-paths: config
+      import: "optional:configserver:"
+      uri: http://localhost:8888
+      fail-fast: true
 
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty.http.client: DEBUG
+
+# Configuración de Actuator
 management:
   endpoints:
     web:
       exposure:
         include: "*"
   endpoint:
-    refresh:
-      enabled: true
-
+    health:
+      show-details: always

@@ -1,10 +1,10 @@
-package com.example.msconfigserver;
+package com.example.apigateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MsConfigServerApplicationTests {
+class ApigatewayApplicationTests {
 
 	@Test
 	void contextLoads() {
